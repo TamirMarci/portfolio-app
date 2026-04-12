@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-gray-950 text-gray-100 font-sans;
+  }
+
+  /* Scrollbar styling for dark mode */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-gray-900 border border-gray-800 rounded-xl;
+  }
+
+  .stat-card {
+    @apply card p-5;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+
+  .badge-green {
+    @apply badge bg-emerald-500/10 text-emerald-400;
+  }
+
+  .badge-red {
+    @apply badge bg-red-500/10 text-red-400;
+  }
+
+  .badge-blue {
+    @apply badge bg-blue-500/10 text-blue-400;
+  }
+
+  .badge-amber {
+    @apply badge bg-amber-500/10 text-amber-400;
+  }
+
+  .badge-gray {
+    @apply badge bg-gray-500/10 text-gray-400;
+  }
+
+  .table-row-hover {
+    @apply hover:bg-gray-800/50 transition-colors duration-100;
+  }
+}

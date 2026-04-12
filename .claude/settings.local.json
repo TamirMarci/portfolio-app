@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(python -c \":*)",
+      "Bash(pip install openpyxl -q)",
+      "Bash(pip install -r requirements.txt -q)",
+      "Bash(python -m importer.run_import --reset)",
+      "Bash(taskkill /F /IM python.exe /FI \"WINDOWTITLE eq uvicorn*\")",
+      "Bash(pkill -f uvicorn)",
+      "Bash(python -c \"import sys; sys.path.insert\\(0,''''\\); from app.database import SessionLocal, create_tables; from app.repositories import holding_repo; create_tables\\(\\); db = SessionLocal\\(\\); holdings = holding_repo.get_all_with_asset\\(db\\); print\\(f''Holdings: {len\\(holdings\\)}''\\); [print\\(f''  {h.asset.symbol} \\({h.asset.currency}\\)''\\) for h in holdings]; db.close\\(\\)\")",
+      "Bash(python3 -c \"import sys; sys.path.insert\\(0,''''\\); from app.database import SessionLocal, create_tables; from app.repositories import holding_repo; create_tables\\(\\); db = SessionLocal\\(\\); holdings = holding_repo.get_all_with_asset\\(db\\); print\\(f''Holdings: {len\\(holdings\\)}''\\); [print\\(f''  {h.asset.symbol} \\({h.asset.currency}\\)''\\) for h in holdings]; db.close\\(\\)\")",
+      "Bash(where py)",
+      "Bash(py --version)",
+      "Bash(ls \"c:\\\\Users\\\\orilu\\\\Desktop\\\\Tamir\\\\MyProject\\\\backend\"\" 2>&1 && ls \"c:UsersoriluAppDataLocalPrograms\"\")",
+      "Bash(/c/Users/orilu/AppData/Local/Programs/Python/Python313/python.exe --version)",
+      "Bash(/c/Users/orilu/AppData/Local/Programs/Python/Python313/python.exe -c \":*)",
+      "Bash(netstat -ano)",
+      "Read(//c/Users/orilu/Desktop/Tamir/MyProject/backend/**)",
+      "Bash(while read pid)",
+      "Bash(do echo \"Killing PID $pid on port 8000\" taskkill //F //PID \"$pid\" done)",
+      "Bash(curl -s -w \"\\\\nHTTP_STATUS:%{http_code}\" http://localhost:8000/api/prices/refresh)",
+      "Bash(python -c \"from app.schemas.transaction import TransactionCreate; print\\(''ok''\\)\")",
+      "Bash(python3 -c \"from app.services.transaction_service import get_all_transactions; print\\(''OK''\\)\")",
+      "Bash(py -c \"from app.services.transaction_service import get_all_transactions; print\\(''OK''\\)\")",
+      "Bash(npm run:*)",
+      "Bash(python -c \"from app.services.option_service import process_expired_options; from app.schemas.option import ProcessExpiredResult, ExpiredOptionResult; from app.repositories.portfolio_cash_repo import get, add; from app.models.portfolio_cash import PortfolioCash; print\\(''OK''\\)\")",
+      "Bash(python3 -c \"from app.services.option_service import process_expired_options; from app.schemas.option import ProcessExpiredResult, ExpiredOptionResult; from app.repositories.portfolio_cash_repo import get, add; from app.models.portfolio_cash import PortfolioCash; print\\(''OK''\\)\")"
+    ]
+  }
+}
