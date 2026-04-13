@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -9,9 +9,13 @@ router = APIRouter(prefix="/api/transactions", tags=["transactions"])
 
 
 @router.get("", response_model=TransactionList)
-def get_transactions(db: Session = Depends(get_db)):
-    """Return all recorded transactions, sorted by date descending."""
-    return transaction_service.get_all_transactions(db)
+def get_transactions(
+    start_date: str | None = Query(None, description="Filter from date (YYYY-MM-DD, inclusive)"),
+    end_date: str | None = Query(None, description="Filter to date (YYYY-MM-DD, inclusive)"),
+    db: Session = Depends(get_db),
+):
+    """Return transactions sorted by date descending, optionally filtered by trade_date range."""
+    return transaction_service.get_all_transactions(db, start_date=start_date, end_date=end_date)
 
 
 @router.post("", response_model=TransactionRead, status_code=status.HTTP_201_CREATED)

@@ -214,8 +214,12 @@ def delete_transaction(db: Session, transaction_id: str) -> None:
     recalculate_holding(db, asset_id)
 
 
-def get_all_transactions(db: Session) -> TransactionList:
-    """Return all transactions enriched with asset metadata."""
-    transactions = transaction_repo.get_all_with_asset(db)
+def get_all_transactions(
+    db: Session,
+    start_date: str | None = None,
+    end_date: str | None = None,
+) -> TransactionList:
+    """Return transactions enriched with asset metadata, optionally filtered by date range."""
+    transactions = transaction_repo.get_all_with_asset(db, start_date=start_date, end_date=end_date)
     result = [_build_read(tx, tx.asset) for tx in transactions]
     return TransactionList(transactions=result, total_count=len(result))

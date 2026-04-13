@@ -67,14 +67,17 @@ def get_by_natural_key(
     )
 
 
-def get_all_with_asset(db: Session) -> list[Transaction]:
-    return (
-        db.query(Transaction)
-        .options(joinedload(Transaction.asset))
-        .join(Asset)
-        .order_by(Transaction.trade_date.desc())
-        .all()
-    )
+def get_all_with_asset(
+    db: Session,
+    start_date: str | None = None,
+    end_date: str | None = None,
+) -> list[Transaction]:
+    q = db.query(Transaction).options(joinedload(Transaction.asset)).join(Asset)
+    if start_date:
+        q = q.filter(Transaction.trade_date >= start_date)
+    if end_date:
+        q = q.filter(Transaction.trade_date <= end_date)
+    return q.order_by(Transaction.trade_date.desc()).all()
 
 
 def get_by_source(db: Session, source: str) -> list[Transaction]:

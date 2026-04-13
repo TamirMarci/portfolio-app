@@ -1,8 +1,13 @@
 import client from './client'
 import type { Transaction, TransactionCreate, TransactionUpdate, TransactionList } from './types'
 
-export async function fetchTransactions(): Promise<TransactionList> {
-  const { data } = await client.get<TransactionList>('/transactions')
+export interface TransactionDateFilter {
+  start_date?: string  // YYYY-MM-DD
+  end_date?: string    // YYYY-MM-DD
+}
+
+export async function fetchTransactions(filter?: TransactionDateFilter): Promise<TransactionList> {
+  const { data } = await client.get<TransactionList>('/transactions', { params: filter })
   return data
 }
 

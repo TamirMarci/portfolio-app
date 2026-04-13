@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchTransactions } from '../api/transactions'
+import { fetchTransactions, type TransactionDateFilter } from '../api/transactions'
 
-export function useTransactions() {
+export function useTransactions(filter?: TransactionDateFilter) {
   return useQuery({
-    queryKey: ['transactions'],
-    queryFn: fetchTransactions,
+    queryKey: ['transactions', filter?.start_date ?? null, filter?.end_date ?? null],
+    queryFn: () => fetchTransactions(filter),
   })
 }
